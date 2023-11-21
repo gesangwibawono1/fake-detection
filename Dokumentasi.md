@@ -1,0 +1,17 @@
+# Submission 1: Fake News Detection
+Nama: Gesang Wibawono
+ 
+Username dicoding: gesang_wibawono
+ 
+| | Deskripsi |
+| ----------- | ----------- |
+| Dataset |Sumber dataset adalah dari **Kaggle** pada tautan ini [*Source based Fake News Classification*](https://www.kaggle.com/datasets/ruchi798/source-based-news-classification). |
+| Masalah | Di era saat ini, berita mudah diakses dan disebarluaskan ke publik melalui berbagai *platform*. Berita ini dapat dimanfaatkan untuk menggiring opini masyarakat untuk kepentingan kelompok tertentu. Bahkan bisa digunakan untuk menjatuhkan reputasi seseorang atau kelompok. Oleh karena itu, masayrakat perlu menyaring mana berita faktual dan berita palsu (*hoax*). Tujuan projek ini adalah Bagaimana mendeteksi sebuah berita itu apakah *fake* atau *real*? |
+| Solusi machine learning | Membuat model deteksi berita untuk diklasifikasikan *fake* atau *real*. |
+| Metode pengolahan | 1. ***Sampling & Balancing***, ini dilakukan pada *preprocessing* dengan mengambil sampel dan menyamakan banyak label yaitu masing-masing 500 *record*. 2. ***Derivation***, ini dilakukan pada *preprocessing* dengan mengubah kolom *text_without_stopwords* menjadi kolom *text* serta mengubah nilai kategori menjadi *factorize integer* pada kolom *label*. 3. ***Drop Feature***, ini dilakukan pada *preprocessing* dengan membuang kolom yang tidak akan dipakai dalam model. Di sini kolom yang dipakai adalah *text* dan *label*. 4. ***Lowercase***, ini dilakukan pada *transform* dengan mengubah nilai *text* menjadi *lowercase*. 5. ***Casting***, ini dilakukan pada *transform* dengan menkonversi label menjadi *integer*. |
+| Arsitektur model | Model dibangun menggunakan LSTM di mana nilai *text* akan di-*vectorize* yang dengan ukuran 500. Kemudian terdapat *layer embedding*,  2 *hidden layer* dan 1 *output layer*. |
+| Metrik evaluasi | Matrik evaluasi yaitu *loss* dengan *binary_crossentropy* dan *accuray* dengan *BinaryAccuracy*, serta dengan melihat nilai AUC, FalsePositives, TruePositives, dan FalseNegatives. |
+| Performa model | Model yang dibangun dapat dikatakan cukup baik yaitu dengan *binary_accuracy* sebesar 70,63% dan loss sebesar 0.6566 dari sampel 1000 *record*. Ini dilakukan karena bertujuan untuk mempercepat process *pipeline*. Namun, setelah melakukan *test* dari  dataset di luar *pipeline* hasil prediksi dari model *Rest API* selalu benar.  |
+| Opsi deployment | *Deployment* menggunakan *platform* ***Railway*** merupakan salah satu *cloud* yang memberikan layanan dengan kredit gratis *trial* sebesar  5 *Dollar*. Projek diunggah dengan men-*deploy* *dockerfile* dari *fake detection model*. |
+| Web app | Tautan web app adalah [Fake Detection](https://fake-detection.up.railway.app/v1/models/fake-detection-model/metadata). |
+| Monitoring | Metrik yang dikeluarkan banyak secara garis besar dibagi ke beberapa group seperti metrik *saved model*, *graph*, *request* dan *scrape*. Di sini dari grafana dashboard hanya mengambil 2 metrik yaitu *request count* dan *request latency count*. Metrik ***Request Count*** dalam bentuk panel statistik menunjukkan angka 3 yang berarti request ke model sebanyak 3. Sedangkan metrik ***Request Latency Count*** dalam bentuk panel histogram. |
